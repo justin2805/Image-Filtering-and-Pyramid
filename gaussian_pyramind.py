@@ -30,26 +30,35 @@ class Gaussian_pyramind:
         print("cols : ",cols)
         print(cols + cols // 2)
         # pyramid = tuple(pyramid_gaussian(image, downscale=2, multichannel=True))
-        composite_image = numpy.zeros((rows+109, cols + cols // 2), dtype=numpy.double)
+        composite_image = numpy.zeros((rows+150, cols + cols // 2), dtype=numpy.double)
         print(composite_image.shape)
-        print(resized_img_array[0].shape)
+        print(resized_img_array[0].shape[:1])
         composite_image[:109,:109] = resized_img_array[0]
         r_row = 0
         r_col = 109
+
+        text_post_x = 35
+        text_post_y = 135
+
+        fig, ax = plt.subplots()
+        ax.text(text_post_x,text_post_y,image_array[0].shape[1],fontsize=10, color="white")
+
         for p in resized_img_array[1:]:
             n_rows, n_cols = p.shape[:2]
             composite_image[r_row: r_row+n_rows,r_col: r_col+n_cols] = p
             r_col = r_col + 109
 
 
-        row = 109
+        row = 150
         print("row : ",row)
         composite_image[row:row+rows, :cols] = image_array[0]
-        i_row = 109
+        i_row = 150
         for p in image_array[1:]:
             n_rows, n_cols = p.shape[:2]
             print("n_rows n_cols ",n_rows)
             composite_image[i_row:i_row + n_rows, cols:cols + n_cols] = p
+            text_post_x += 109
+            ax.text(text_post_x, text_post_y, p.shape[1], fontsize=10, color="white")
             print("n_rows : ",n_rows)
             print("i_row : ",i_row)
             print("n_cols : ",n_cols)
@@ -57,7 +66,8 @@ class Gaussian_pyramind:
             i_row += n_rows
             print("irow after add: ",i_row)
             print("*********************\n\n")
-        fig, ax = plt.subplots()
+
+        ax.plot([2],[1],'o')
         ax.imshow(composite_image,cmap='gray')
         plt.show()
         # cv2.imshow("Output",image_array)
