@@ -9,8 +9,7 @@ class Gaussian_pyramind:
         return read_disp_img.Read_display_images()
 
     def make_pyramid(self):
-        print("Gaussian pyramind")
-        original_image = read_disp_img.Read_display_images().readImage()
+        original_image = read_disp_img.Read_display_images().readImage(0)
         final_image = original_image
         image_array = [final_image]
         resized_img_array = [cv2.resize(original_image,(109,109))]
@@ -23,16 +22,16 @@ class Gaussian_pyramind:
             # print(final_image[0])
             # print("\n***********************************************************\n")
             # self.i_o_img().display_image(original_image, final_image)
-        print(len(image_array))
-        print(len(resized_img_array))
+        # print(len(image_array))
+        # print(len(resized_img_array))
         rows, cols = original_image.shape
-        print("rows : ",rows)
-        print("cols : ",cols)
-        print(cols + cols // 2)
+        # print("rows : ",rows)
+        # print("cols : ",cols)
+        # print(cols + cols // 2)
         # pyramid = tuple(pyramid_gaussian(image, downscale=2, multichannel=True))
         composite_image = numpy.zeros((rows+150, cols + cols // 2), dtype=numpy.double)
-        print(composite_image.shape)
-        print(resized_img_array[0].shape[:1])
+        # print(composite_image.shape)
+        # print(resized_img_array[0].shape[:1])
         composite_image[:109,:109] = resized_img_array[0]
         r_row = 0
         r_col = 109
@@ -50,22 +49,22 @@ class Gaussian_pyramind:
 
 
         row = 150
-        print("row : ",row)
+        # print("row : ",row)
         composite_image[row:row+rows, :cols] = image_array[0]
         i_row = 150
         for p in image_array[1:]:
             n_rows, n_cols = p.shape[:2]
-            print("n_rows n_cols ",n_rows)
+            # print("n_rows n_cols ",n_rows)
             composite_image[i_row:i_row + n_rows, cols:cols + n_cols] = p
             text_post_x += 109
             ax.text(text_post_x, text_post_y, p.shape[1], fontsize=10, color="white")
-            print("n_rows : ",n_rows)
-            print("i_row : ",i_row)
-            print("n_cols : ",n_cols)
-            print("cols : ",cols)
+            # print("n_rows : ",n_rows)
+            # print("i_row : ",i_row)
+            # print("n_cols : ",n_cols)
+            # print("cols : ",cols)
             i_row += n_rows
-            print("irow after add: ",i_row)
-            print("*********************\n\n")
+            # print("irow after add: ",i_row)
+            # print("*********************\n\n")
 
         ax.plot([2],[1],'o')
         ax.imshow(composite_image,cmap='gray')
