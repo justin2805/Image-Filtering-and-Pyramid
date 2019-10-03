@@ -9,7 +9,7 @@ class Gaussian_pyramind:
         return read_disp_img.Read_display_images()
 
     def make_pyramid(self):
-        original_image = read_disp_img.Read_display_images().readImage(5)
+        original_image = read_disp_img.Read_display_images().readImage(0)
         final_image = original_image
         image_array = [final_image]
         resized_img_array = [cv2.resize(original_image,(109,109))]
