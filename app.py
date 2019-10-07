@@ -30,15 +30,19 @@ class Main(object):
                       "      4--> Go to main menu\n-->"))
             if choice == 1:
                 k_size = int(input("Enter k_size : "))
-                ism_obj.mean_filtering(k_size,img_choice)
+                # ism_obj.mean_filtering(k_size,img_choice)
+                ism_obj.mean_filtering_full_algo(k_size,img_choice)
             elif choice == 2:
-                stdX = int(input("Enter standard deviation in X direction : "))
-                stdY = int(input("Enter standard deviation in Y direction : "))
+                # stdX = int(input("Enter standard deviation in X direction : "))
+                # stdY = int(input("Enter standard deviation in Y direction : "))
+                k_size = int(input("Enter ksize : "))
                 sigma = float(input("Enter sigma value : "))
-                ism_obj.gaussian_smoothing(stdX, stdY, sigma,img_choice)
+                ism_obj.gaussian_filtering_full_algo(k_size, sigma,img_choice)
+                # ism_obj.gaussian_filtering_full_algo(3, sigma,img_choice)
+                # ism_obj.gaussian_smoothing(stdX,stdY, sigma,img_choice)
             elif choice == 3:
                 ksize = int(input("Enter ksize : "))
-                ism_obj.median_filtering(ksize, img_choice)
+                ism_obj.median_filtering_full_algo(ksize, img_choice)
             elif choice == 4:
                 print("Moving back to main menu:\n*************************************************************************\n")
                 break
@@ -46,14 +50,17 @@ class Main(object):
                 print("Invalid input")
 
     def image_sharpening(self):
-        stdX = int(input("*************************************************************************\n"
-                               "IMAGE SHARPENING:\n*************************************************************************\n"
-                         "Enter standard deviation in X direction : "))
-        stdY = int(input("Enter standard deviation in Y direction : "))
-        sigma = float(input("Enter sigma value : "))
+        # stdX = int(input("*************************************************************************\n"
+        #                        "IMAGE SHARPENING:\n*************************************************************************\n"
+        #                  "Enter standard deviation in X direction : "))
+        # stdY = int(input("Enter standard deviation in Y direction : "))
+        # sigma = float(input("Enter sigma value : "))
         choice = self.select_image()
+        print("Select composite mask choice  : \n1. | 0 -1 0| or 2. | -1 -1 -1|\n   |-1 5 -1|       | -1  9 -1|\n   | 0 -1 0|       | -1 -1 -1|\n")
+        composite_mask_choice = int(input("-->"))
         sharpen_obj = image_sharpening.Image_sharpening()
-        sharpen_obj.sharpen(stdX, stdY, sigma, choice)
+        # sharpen_obj.sharpen(stdX, stdY, sigma, choice)
+        sharpen_obj.sharpen_new(choice,composite_mask_choice)
 
     def gaussian_pyramind(self):
         print("*************************************************************************\n"
@@ -64,8 +71,8 @@ class Main(object):
     def select_image(self):
         choice = int(input("-------SELECT IMAGE FOR PROCESSING----------\n"
                            "1--> Kidney\n2--> Pattern blurring\n3--> Hubble\n"
-                           "4--> Circuit Board\n5--> Blurry moon\n6--> Text\n-->"))
-        if choice < 1 or choice > 6:
+                           "4--> Circuit Board\n5--> Blurry moon\n6--> Text\n7--> jack-russell-blurred\n-->"))
+        if choice < 1 or choice > 7:
             print("Invalid entry")
         else:
             return choice

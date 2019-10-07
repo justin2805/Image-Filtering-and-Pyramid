@@ -18,6 +18,8 @@ class Read_display_images:
             image_path = r'images/Fig0338(a)(blurry_moon).tif'
         elif use_image == 6:
             image_path = r'images/Fig0340(a)(dipxe_text).tif'
+        elif use_image == 7:
+            image_path = r'images/jack-russell-blurred-1200x630.jpg'
         else:
             image_path = r'images/Lenna.png'
         image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
